@@ -1,0 +1,84 @@
+/*
+ * Tab strip. Only rendered when more than one document is open, so the
+ * single-document layout stays pixel-identical to Typora.
+ */
+
+.ty-tabbar {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+  height: 32px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: var(--side-bar-bg-color);
+  border-bottom: var(--window-border);
+  user-select: none;
+}
+
+.ty-tabbar::-webkit-scrollbar {
+  height: 0;
+}
+
+.ty-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  min-width: 110px;
+  max-width: 220px;
+  height: 32px;
+  padding: 0 10px;
+  border-right: var(--window-border);
+  color: var(--control-text-color);
+  font-size: 12px;
+  cursor: default;
+}
+
+.ty-tab:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+.ty-tab.active {
+  background: var(--bg-color);
+  color: var(--text-color);
+  box-shadow: inset 0 -2px 0 var(--primary-color);
+}
+
+.ty-tab.dirty .ty-tab-title::after {
+  content: ' •';
+  color: var(--primary-color);
+}
+
+.ty-tab-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ty-tab-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+  opacity: 0;
+}
+
+.ty-tab:hover .ty-tab-close,
+.ty-tab.active .ty-tab-close {
+  opacity: 0.6;
+}
+
+.ty-tab-close:hover {
+  opacity: 1;
+  background: var(--item-hover-bg-color);
+}

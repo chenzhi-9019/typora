@@ -1,0 +1,246 @@
+/*
+ * Theme: night. Dark surface, 914px measure.
+ *
+ * Block metrics read from tmp/typora-app/app/resources/style/themes/night.css and
+ * base.css; headings keep that theme's reset (margin 0, only margin-bottom is set) and its
+ * 1.625rem line rhythm, so nothing here falls back to the light defaults.
+ */
+body[data-theme='night'] {
+  --bg-color: #363b40;
+  --text-color: #b8bfc6;
+  --side-bar-bg-color: #2e3033;
+  --control-text-color: #b7b7b7;
+  --control-text-hover-color: #eeeeee;
+  --item-hover-bg-color: #101620;
+  --item-hover-text-color: #ffffff;
+  --active-file-bg-color: #222222;
+  --active-file-text-color: #ffffff;
+  --window-border: 1px solid #555555;
+  --primary-color: #6dc1e7;
+  --link-color: #6dc1e7;
+  --select-text-bg-color: #4a89dc;
+  --select-text-font-color: #ffffff;
+  --search-select-bg-color: #428bca;
+  --meta-content-color: #8e959d;
+  --md-char-color: #6a7076;
+  --code-block-bg: #333333;
+  --code-bg: rgba(0, 0, 0, 0.05);
+  --table-border: #474d54;
+  --table-header-bg: transparent;
+  --quote-border: #474d54;
+  --quote-color: #9da2a6;
+  --write-max-width: 914px;
+  --write-font-size: 16px;
+  --write-line-height: 1.6;
+  --footer-border: 1px solid #555555;
+  /* highlight.js palette: style/themes/night/codeblock.dark.css */
+  --hljs-keyword: #c88fd0;
+  --hljs-builtin: #f3b3f8;
+  --hljs-number: #64ab8f;
+  --hljs-string: #d26b6b;
+  --hljs-string-2: #f50;
+  --hljs-comment: #da924a;
+  --hljs-def: #8d8df0;
+  --hljs-variable: #b8bfc6;
+  --hljs-variable-2: #9fbad5;
+  --hljs-attribute: #7575e4;
+  --hljs-property: #b8bfc6;
+  --hljs-tag: #7df46a;
+  --hljs-meta: #b7b3b3;
+  --hljs-atom: #84b6cb;
+  --hljs-bracket: #997;
+  --hljs-quote: #57ac57;
+  --hljs-link: #d3d3ef;
+  --hljs-addition: #50e650;
+  --hljs-deletion: #d95050;
+  --hljs-operator: #b8bfc6;
+  color-scheme: dark;
+}
+
+body[data-theme='night'] #write {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', 'SF Pro', sans-serif;
+}
+
+/* ------------------------------------------------------------- headings */
+
+body[data-theme='night'] #write h1,
+body[data-theme='night'] #write h2,
+body[data-theme='night'] #write h3,
+body[data-theme='night'] #write h4,
+body[data-theme='night'] #write h5,
+body[data-theme='night'] #write h6 {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  color: #dedede;
+  font-family: 'Lucida Grande', Corbel, sans-serif;
+  font-weight: normal;
+  word-wrap: break-word;
+}
+
+body[data-theme='night'] #write h1 {
+  margin-top: 2em;
+  font-size: 2.5em;
+  line-height: 2.75rem;
+  letter-spacing: -1.5px;
+}
+
+body[data-theme='night'] #write h2 {
+  font-size: 1.63em;
+  line-height: 1.875rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+body[data-theme='night'] #write h3 {
+  font-size: 1.17em;
+  line-height: 1.5rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+body[data-theme='night'] #write h4 {
+  font-size: 1.12em;
+  line-height: 1.375rem;
+  color: #ffffff;
+}
+
+body[data-theme='night'] #write h5 {
+  font-size: 0.97em;
+  line-height: 1.25rem;
+  font-weight: bold;
+}
+
+body[data-theme='night'] #write h6 {
+  margin-bottom: 0.75rem;
+  font-size: 0.93em;
+  line-height: 1rem;
+  color: #ffffff;
+}
+
+/* -------------------------------------------------------- text and lists */
+
+body[data-theme='night'] #write p,
+body[data-theme='night'] #write ul,
+body[data-theme='night'] #write ol,
+body[data-theme='night'] #write table {
+  margin: 0 0 1.5rem;
+}
+
+body[data-theme='night'] #write li > ul,
+body[data-theme='night'] #write li > ol,
+body[data-theme='night'] #write ul ul,
+body[data-theme='night'] #write ul ol,
+body[data-theme='night'] #write ol ul,
+body[data-theme='night'] #write ol ol {
+  margin: 0;
+}
+
+body[data-theme='night'] #write ol {
+  list-style: decimal;
+}
+
+body[data-theme='night'] #write li.md-task-list-item {
+  padding-left: 1.25rem;
+}
+
+body[data-theme='night'] #write .md-task-list-item > input {
+  margin-top: 0.3rem;
+  margin-left: -1.3em;
+}
+
+/* ------------------------------------------------------------ blockquote */
+
+body[data-theme='night'] #write blockquote {
+  margin: 35px 0 1.875rem 1.875rem;
+  padding: 0 0 0 30px;
+  border-left: 2px solid #474d54;
+  color: #9da2a6;
+}
+
+/* ------------------------------------------------------------------ code */
+
+body[data-theme='night'] #write code {
+  padding: 2px 5px;
+  border: 0;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 0.875em;
+}
+
+body[data-theme='night'] #write pre.md-fences {
+  margin: 0 0 20px;
+  padding: 10px 10px 10px 30px;
+  border: 0;
+  border-radius: 0;
+  background: #333333;
+  /* base.css .md-fences (0,1,0) outranks the theme's "pre" (0,0,1), so fences keep .9rem. */
+  font-size: 0.9em;
+  line-height: 1.625rem;
+}
+
+body[data-theme='night'] #write pre.md-fences code {
+  padding: 0;
+  background: transparent;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------------- tables */
+
+body[data-theme='night'] #write table {
+  width: 100%;
+  max-width: 100%;
+}
+
+body[data-theme='night'] #write table tr {
+  border: 0;
+}
+
+body[data-theme='night'] #write table th,
+body[data-theme='night'] #write table td {
+  padding: 5px 10px;
+  border: 1px solid #474d54;
+  vertical-align: top;
+}
+
+body[data-theme='night'] #write table th {
+  border-bottom: 0;
+  color: #dedede;
+  font-weight: bold;
+}
+
+/* -------------------------------------------------- rule, links, images */
+
+body[data-theme='night'] #write hr {
+  height: 2px;
+  margin: 24px 0;
+  border: 0;
+  background: #474d54;
+}
+
+body[data-theme='night'] #write a {
+  color: #e0e0e0;
+  text-decoration: underline;
+}
+
+body[data-theme='night'] #write a:hover {
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------- front matter */
+
+body[data-theme='night'] #write pre.md-meta-block {
+  padding-bottom: 0.6em;
+  border: 0;
+  border-bottom: 1px dashed #cccccc;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 0.8em;
+  line-height: 1.6em;
+}
+
+/* ------------------------------------------------------- maths, mermaid */
+
+body[data-theme='night'] #write .md-math-block {
+  margin: 1rem 0;
+}

@@ -1,0 +1,302 @@
+/*
+ * Editor chrome only. Article typography, colours and spacing belong to the
+ * outer stylesheet; everything below is layout for the surfaces this module owns
+ * and takes its colours from the design tokens in src/renderer/src/styles.
+ */
+
+.typora-editor-host {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#write {
+  min-height: 100%;
+  outline: none;
+}
+
+#typora-source {
+  height: 100%;
+}
+
+#typora-source[hidden],
+#write[hidden] {
+  display: none;
+}
+
+.typora-source-editor {
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.typora-source-editor .cm-scroller {
+  font-family: var(--monospace);
+  line-height: 1.6;
+}
+
+.typora-source-editor .cm-gutters {
+  color: var(--control-text-color);
+  background-color: var(--bg-color);
+  border-right: var(--window-border);
+}
+
+#write.show-br .md-br-mark::after {
+  content: '\21B5';
+  color: var(--md-char-color);
+  font-size: 0.75em;
+  line-height: 1;
+  margin-left: 0.15em;
+  vertical-align: baseline;
+}
+
+#write.indent-first-line p {
+  text-indent: 2em;
+}
+
+#write.md-collapse-softbreak br.md-softbreak {
+  display: none;
+}
+
+.md-fences-with-lineno {
+  position: relative;
+  padding-left: 2.75em;
+}
+
+.md-fences-gutter {
+  position: absolute;
+  top: 0.45em;
+  left: 0.5em;
+  color: var(--md-char-color);
+  font-size: 0.85em;
+  line-height: inherit;
+  text-align: right;
+  white-space: pre;
+  user-select: none;
+  pointer-events: none;
+}
+
+#write.code-wrap pre.md-fences {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.md-math-block {
+  position: relative;
+}
+
+.md-math-number {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  color: var(--md-char-color);
+  font-size: 0.9em;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+.md-diagram {
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+::highlight(typora-find) {
+  background-color: var(--active-file-bg-color);
+}
+
+::highlight(typora-find-current) {
+  background-color: var(--select-text-bg-color);
+  color: var(--select-text-font-color);
+}
+
+#write.md-drop-target {
+  outline: 2px dashed var(--select-text-bg-color);
+  outline-offset: 4px;
+}
+
+.md-table-col-selected,
+.md-table-row-selected {
+  background-color: var(--select-text-bg-color);
+}
+
+.md-raw-edit {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  min-height: 3em;
+  margin: 0;
+  padding: 0.5em 0.75em;
+  font-family: var(--monospace);
+  font-size: 0.9em;
+  line-height: 1.45;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--active-file-border-color);
+  border-radius: 3px;
+  outline: none;
+  resize: none;
+}
+
+.md-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.md-diagram-error {
+  font-family: var(--monospace);
+  white-space: pre-wrap;
+}
+
+.typora-find-bar {
+  position: fixed;
+  top: 12px;
+  right: 24px;
+  z-index: 40;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  font-family: var(--ui-font);
+  font-size: var(--ui-font-size);
+  color: var(--control-text-color);
+  background-color: var(--side-bar-bg-color);
+  border: var(--window-border);
+  border-radius: 3px;
+  box-shadow: 0 2px 8px var(--item-hover-bg-color);
+}
+
+.typora-find-bar[hidden] {
+  display: none;
+}
+
+.typora-find-bar input {
+  font: inherit;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--item-hover-bg-color);
+  border-radius: 2px;
+  padding: 2px 4px;
+  min-width: 120px;
+}
+
+.typora-find-bar input:focus {
+  outline: none;
+  border-color: var(--active-file-border-color);
+}
+
+.typora-find-button {
+  font: inherit;
+  color: var(--control-text-color);
+  background-color: transparent;
+  border: 0;
+  border-radius: 2px;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.typora-find-button:hover {
+  color: var(--control-text-hover-color);
+  background-color: var(--item-hover-bg-color);
+}
+
+.typora-find-counter {
+  min-width: 32px;
+  text-align: center;
+}
+
+/* Typora port: the fence language pill (Frame.js / base-control.css) */
+#write pre.md-fences {
+  position: relative;
+}
+
+.code-tooltip {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  text-align: left;
+  font-size: 0.8em;
+  background: inherit;
+  border-radius: 2px;
+  opacity: 1;
+  box-shadow: 0 1px 1px 0 rgba(0, 28, 36, 0.2);
+}
+
+.md-fences .code-tooltip {
+  bottom: -2.5em;
+  padding-left: 20px;
+  padding-right: 20px;
+  float: right;
+}
+
+.code-tooltip .ty-input {
+  display: inline-block;
+  min-width: 140px;
+  margin: 2px 0;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 3px;
+  background-color: transparent;
+  text-align: center;
+  line-height: 1.5;
+  /* Typora renders the language in body text colour, not the faded marker grey */
+  color: var(--text-color, var(--md-char-color));
+  font-family: var(--monospace);
+  outline: none;
+}
+
+#write .code-tooltip {
+  line-height: 1;
+  width: auto;
+}
+
+.code-tooltip .ty-input:empty::before {
+  content: attr(placeholder);
+  color: var(--md-char-color);
+  opacity: 0.7;
+}
+
+/* Typora only shows the pill while the fence is active */
+.md-fences .code-tooltip {
+  display: none;
+}
+
+.md-fences.md-focus .code-tooltip,
+.md-fences:hover .code-tooltip {
+  display: block;
+}
+
+/* language suggestions: mounted on .typora-app, never inside #write */
+.typora-lang-suggest {
+  position: fixed;
+  z-index: 60;
+  max-height: 12em;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.25em 0;
+  list-style: none;
+  background-color: var(--bg-color);
+  border: 1px solid var(--active-file-border-color);
+  border-radius: 3px;
+  box-shadow: 0 2px 6px 0 rgba(0, 28, 36, 0.2);
+}
+
+.typora-lang-suggest[hidden] {
+  display: none;
+}
+
+.typora-lang-suggest li {
+  padding: 0.15em 0.75em;
+  color: var(--text-color);
+  font-family: var(--monospace);
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+.typora-lang-suggest li.md-active {
+  background-color: var(--select-text-bg-color);
+  color: var(--select-text-font-color);
+}

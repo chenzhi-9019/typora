@@ -1,0 +1,431 @@
+/*
+ * Editor surface. Structural rules only: every colour, size and metric resolves
+ * through a token so a theme can restyle the document without touching layout.
+ * The `#write` box matches Typora 1.14.15: centred, max-width from the theme,
+ * 30px padding, 100px bottom padding, 1.6 line height at 16px.
+ */
+
+#write {
+  display: block;
+  width: 100%;
+  max-width: var(--write-max-width);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: var(--write-padding);
+  padding-bottom: 100px;
+  outline: none;
+  color: var(--text-color);
+  font-size: var(--write-font-size, 16px);
+  line-height: var(--write-line-height, 1.6);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  caret-color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+#write > *:first-child {
+  margin-top: 0;
+}
+
+#write p,
+#write blockquote,
+#write ul,
+#write ol,
+#write dl,
+#write table {
+  margin: 0.8em 0;
+}
+
+/* ------------------------------------------------------------- headings */
+
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  position: relative;
+  margin: 1rem 0;
+  font-weight: bold;
+  line-height: 1.4;
+  cursor: text;
+}
+
+#write h1 {
+  font-size: 2.25em;
+  line-height: 1.2;
+}
+#write h2 {
+  font-size: 1.75em;
+  line-height: 1.225;
+}
+#write h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+#write h4 {
+  font-size: 1.25em;
+}
+#write h5 {
+  font-size: 1em;
+}
+#write h6 {
+  font-size: 1em;
+  color: var(--meta-content-color);
+}
+
+/* --------------------------------------------------------------- inline */
+
+#write strong {
+  font-weight: 600;
+}
+#write em {
+  font-style: italic;
+}
+#write del {
+  text-decoration: line-through;
+}
+#write u {
+  text-decoration: underline;
+}
+
+#write a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+#write a:hover {
+  text-decoration: underline;
+}
+
+#write img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+#write code {
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: var(--code-bg, rgba(0, 0, 0, 0.05));
+  font-family: var(--monospace);
+  font-size: 0.9em;
+}
+
+#write hr {
+  height: 1px;
+  margin: 2em 0;
+  border: 0;
+  background: var(--window-border);
+}
+
+/* ----------------------------------------------------------------- lists */
+
+#write ul,
+#write ol {
+  padding-left: 2rem;
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+  margin-top: 30px;
+}
+
+/*
+ * Typora wraps every list item body in a paragraph carrying a .5rem margin.
+ * This renderer keeps tight-list items bare, so the same rhythm is expressed on
+ * the item itself: 8px between siblings (collapsed) and none above the first.
+ */
+#write li {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+#write li:first-child {
+  margin-top: 0;
+}
+
+#write li p {
+  margin: 0.5rem 0;
+}
+
+#write li > ul,
+#write li > ol {
+  margin: 0.5rem 0 0;
+}
+
+#write li.md-task-list-item {
+  list-style: none;
+}
+
+#write .md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+/* -------------------------------------------------------------- quote */
+
+#write blockquote {
+  padding: 0 1em;
+  border-left: 0.25em solid var(--quote-border, #dfe2e5);
+  color: var(--quote-color, var(--control-text-color));
+}
+
+/* ----------------------------------------------------------- code blocks */
+
+#write pre.md-fences {
+  position: relative;
+  margin: 0 0 var(--block-gap, 0.8em);
+  padding: 0.9em 1em;
+  /* the language pill hangs below the block, so the fence itself must not clip */
+  overflow: visible;
+  border: var(--window-border);
+  border-radius: 3px;
+  background: var(--code-block-bg, #f7f7f7);
+  font-family: var(--monospace);
+  font-size: 0.9em;
+  line-height: 1.45;
+  white-space: pre;
+}
+
+#write pre.md-fences code {
+  display: block;
+  /* scrolling moved off the fence so the language pill is not clipped */
+  overflow-x: auto;
+  padding: 0;
+  background: transparent;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------- code tokens */
+
+/*
+ * highlight.js scopes mapped onto the CodeMirror roles Typora's themes colour: the light
+ * palette is `style/codemirror.css` (.cm-s-inner), the dark one
+ * `style/themes/night/codeblock.dark.css`. A theme supplies only the palette through the
+ * --hljs-* tokens; the class-to-role map lives here so the five themes cannot drift apart.
+ */
+
+#write .hljs-keyword,
+#write .hljs-type,
+#write .hljs-literal {
+  color: var(--hljs-keyword, #708);
+}
+
+#write .hljs-built_in {
+  color: var(--hljs-builtin, #30a);
+}
+
+#write .hljs-number {
+  color: var(--hljs-number, #164);
+}
+
+#write .hljs-string {
+  color: var(--hljs-string, #a11);
+}
+
+#write .hljs-regexp {
+  color: var(--hljs-string-2, #f50);
+}
+
+#write .hljs-comment {
+  color: var(--hljs-comment, #a50);
+}
+
+#write .hljs-title,
+#write .hljs-function,
+#write .hljs-class,
+#write .hljs-section {
+  color: var(--hljs-def, #00f);
+}
+
+#write .hljs-variable,
+#write .hljs-params {
+  color: var(--hljs-variable, #000);
+}
+
+#write .hljs-subst,
+#write .hljs-template-variable {
+  color: var(--hljs-variable-2, #05a);
+}
+
+#write .hljs-attr,
+#write .hljs-attribute,
+#write .hljs-selector-id,
+#write .hljs-selector-class,
+#write .hljs-selector-attr,
+#write .hljs-selector-pseudo {
+  color: var(--hljs-attribute, #00c);
+}
+
+#write .hljs-property {
+  color: var(--hljs-property, #000);
+}
+
+#write .hljs-tag,
+#write .hljs-name,
+#write .hljs-selector-tag {
+  color: var(--hljs-tag, #170);
+}
+
+#write .hljs-meta,
+#write .hljs-doctag {
+  color: var(--hljs-meta, #555);
+}
+
+#write .hljs-symbol,
+#write .hljs-bullet {
+  color: var(--hljs-atom, #219);
+}
+
+#write .hljs-punctuation {
+  color: var(--hljs-bracket, #997);
+}
+
+#write .hljs-quote {
+  color: var(--hljs-quote, #090);
+}
+
+#write .hljs-link {
+  color: var(--hljs-link, #00c);
+}
+
+#write .hljs-addition {
+  color: var(--hljs-addition, #292);
+}
+
+#write .hljs-deletion {
+  color: var(--hljs-deletion, #d44);
+}
+
+#write .hljs-operator {
+  color: var(--hljs-operator, #981a1a);
+}
+
+#write .hljs-emphasis {
+  color: inherit;
+  font-style: italic;
+}
+
+#write .hljs-strong {
+  color: inherit;
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------------- tables */
+
+#write .md-table {
+  overflow-x: auto;
+}
+
+#write table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  width: auto;
+}
+
+#write table tr {
+  border: 1px solid var(--table-border, #dfe2e5);
+}
+
+#write table th,
+#write table td {
+  padding: 6px 13px;
+  border: 1px solid var(--table-border, #dfe2e5);
+}
+
+#write table th {
+  font-weight: bold;
+  border-bottom: 0;
+}
+
+/* --------------------------------------------------------- front matter */
+
+#write pre.md-meta-block {
+  margin: 0 0 1.2em;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 3px;
+  background: var(--code-block-bg, #f7f7f7);
+  color: var(--meta-content-color);
+  font-family: var(--monospace);
+  font-size: 85%;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+/* ---------------------------------------------------------------- maths */
+
+#write .md-math-block {
+  margin: 0 0 var(--block-gap, 0.8em);
+  overflow-x: auto;
+  text-align: center;
+}
+
+#write .md-inline-math {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+#write .md-diagram {
+  margin: 0 0 var(--block-gap, 0.8em);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ selection */
+
+#write ::selection {
+  background: var(--select-text-bg-color);
+  color: var(--select-text-font-color);
+}
+
+/* ----------------------------------------------------------- focus mode */
+
+.focus-mode #write > * {
+  transition: opacity 0.2s ease;
+  opacity: 0.32;
+}
+
+.focus-mode #write > .md-focus {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------- source mode */
+
+.editor-host .cm-editor {
+  height: 100%;
+  color: var(--text-color);
+  background: var(--bg-color);
+  font-family: var(--monospace);
+  font-size: 14px;
+}
+
+.editor-host .cm-scroller {
+  overflow: auto;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.editor-host .cm-content {
+  padding: 12px 0 200px;
+  caret-color: var(--text-color);
+}
+
+.editor-host .cm-gutters {
+  border-right: 1px solid var(--window-border);
+  background: var(--side-bar-bg-color);
+  color: var(--md-char-color);
+}
+
+.editor-host .cm-activeLine,
+.editor-host .cm-activeLineGutter {
+  background: var(--item-hover-bg-color);
+}
+
+.editor-host .cm-selectionBackground {
+  background: var(--select-text-bg-color) !important;
+}
+
+.focus-mode .editor-host .cm-gutters {
+  display: none;
+}

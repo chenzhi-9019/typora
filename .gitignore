@@ -1,0 +1,17 @@
+node_modules
+dist
+out
+.DS_Store
+.eslintcache
+*.log*
+
+# 解包产物与截图参考，不纳入构建
+tmp/
+
+# 本地 agent 配置与 GitHub access token，绝不入库
+.agents/
+.gitoken
+
+# Rust build output
+lib/doc-rs/target/
+resources/bin/

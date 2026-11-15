@@ -1,0 +1,606 @@
+/*
+ * Auxiliary windows (preferences, welcome): standalone documents, so this
+ * stylesheet owns their whole surface instead of inheriting the editor shell.
+ *
+ * Every number below is authored here from a measurement of Typora 1.14.15's own
+ * preference page (tmp/typora-app/app/resources/page-dist/, Preferences.*.css plus
+ * the Windows skin electron.css) and welcome page (WelcomeIndex.*.css); nothing is
+ * copied. The night palette is keyed off `body[data-theme='night']`, so both
+ * windows follow the theme the editor is using.
+ */
+
+/* --- palette ------------------------------------------------------------- */
+
+body {
+  /* surfaces */
+  --win-bg: #f5f5f5;
+  --win-panel-bg: #ffffff;
+  --win-sidebar-bg: #f5f5f4;
+  --win-footer-bg: #fafafa;
+  --win-guide-bg: #f7f7f7;
+  --win-guide-hover-bg: #eeeeee;
+  /* lines */
+  --win-border: #ddd;
+  --win-btn-border: #bbbbbb;
+  /* text */
+  --win-text: #333333;
+  --win-strong-text: #444444;
+  --win-hint: #656795;
+  --win-nav-active-bg: #eeeeee;
+  --win-nav-active-text: #101010;
+  --win-hover-bg: rgba(229, 229, 229, 0.59);
+  /* controls */
+  --win-input-bg: #ffffff;
+  --win-input-border: rgba(136, 136, 136, 0.7);
+  --win-input-focus-border: rgb(122, 167, 221);
+  --win-input-focus-ring: rgba(116, 180, 255, 0.7);
+}
+
+/* Night values come from the app's own night theme (styles/themes/night.css), so
+ * the preferences and welcome chrome matches the editor window it belongs to; the
+ * hint colour is the one Typora's dark skin uses (#b3b4cc, page-dist/cocoa.css). */
+body[data-theme='night'] {
+  --win-bg: #363b40;
+  --win-panel-bg: #363b40;
+  --win-sidebar-bg: #2e3033;
+  --win-footer-bg: #2e3033;
+  --win-guide-bg: #2e3033;
+  --win-guide-hover-bg: #101620;
+  --win-border: #555555;
+  --win-btn-border: #6a6a6a;
+  --win-text: #b8bfc6;
+  --win-strong-text: #ffffff;
+  --win-hint: #b3b4cc;
+  --win-nav-active-bg: #222222;
+  --win-nav-active-text: #ffffff;
+  --win-hover-bg: #101620;
+  --win-input-bg: #2e3033;
+  --win-input-border: transparent;
+  --win-input-focus-border: rgb(92, 132, 180);
+  --win-input-focus-ring: rgba(116, 180, 255, 0.45);
+  color-scheme: dark;
+}
+
+/* --- document ------------------------------------------------------------ */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--win-bg);
+  color: var(--win-text);
+  font-family: var(--ui-font);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* --- shared window chrome ------------------------------------------------ */
+
+.window {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--win-bg);
+  color: var(--win-text);
+}
+
+.window-header {
+  z-index: 3;
+  display: flex;
+  flex: none;
+  height: 56px;
+  background: var(--win-bg);
+  box-shadow:
+    0 1px 0 rgba(12, 13, 14, 0.08),
+    0 1px 3px rgba(12, 13, 14, 0.08),
+    0 4px 20px rgba(12, 13, 14, 0.035),
+    0 1px 1px rgba(12, 13, 14, 0.025);
+}
+
+.window-header-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.window-header h2 {
+  margin: 0 0 0 35px;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 56px;
+}
+
+.window-header button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.window-header .header-action {
+  flex: none;
+  height: 26px;
+  margin: auto 12px auto 0;
+  padding: 0 14px;
+  border: 1px solid var(--win-btn-border);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.window-header .header-action:hover {
+  background: var(--win-hover-bg);
+}
+
+.window-header .header-close {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-left: 1px solid rgba(136, 136, 136, 0.7);
+  font-size: 18px;
+  line-height: 56px;
+  text-align: center;
+}
+
+.window-header .header-close:hover {
+  color: var(--primary-color);
+}
+
+.window-header .icon {
+  display: block;
+  line-height: 56px;
+}
+
+/* --- preferences: shell -------------------------------------------------- */
+
+.window-content {
+  position: relative;
+  display: flex;
+  flex: 1 1;
+  overflow: hidden;
+}
+
+.pane-group {
+  display: flex;
+  flex: 1 1;
+  overflow: hidden;
+}
+
+.pane-sm {
+  min-width: 150px;
+  max-width: 220px;
+}
+
+.sidebar {
+  flex: none;
+  width: 200px;
+  padding-top: 24px;
+  background: var(--win-sidebar-bg);
+  overflow-y: auto;
+}
+
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-group-header {
+  padding: 18px;
+}
+
+.search-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 18px;
+  padding: 5px 10px;
+  border: 1px solid var(--win-border);
+  border-radius: 4px;
+  outline: 0;
+  background: var(--win-input-bg);
+  color: var(--win-text);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.list-group-content {
+  overflow: visible;
+}
+
+.nav-group-item {
+  display: block;
+  margin: 4px 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+}
+
+/* a search dims the panels without a hit, as Typora's own sidebar does */
+.no-search-hit {
+  opacity: 0.5;
+}
+
+.nav-group-item:hover {
+  background: var(--win-hover-bg);
+}
+
+.nav-group-item.active {
+  background: var(--win-nav-active-bg);
+  color: var(--win-nav-active-text);
+}
+
+.pane {
+  position: relative;
+  flex: 1 1;
+  overflow-y: auto;
+  background: var(--win-panel-bg);
+}
+
+/* --- preferences: panel content ------------------------------------------ */
+
+.content {
+  margin-left: 120px;
+  padding: 16px 32px 64px 0;
+}
+
+.panel-header {
+  margin: 56px 0 28px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: default;
+}
+
+.input-group {
+  display: grid;
+  grid-template-columns: minmax(auto, 200px) 1fr;
+  grid-gap: 10px;
+  min-height: 32px;
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+
+/* the header sits in the grid's left column, so a top margin would knock it out of
+   line with the first row of the right column */
+.input-group-header {
+  margin: 0 0 6px;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 26px;
+}
+
+.input-group-content > .row {
+  padding-left: 16px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 26px;
+  line-height: 26px;
+}
+
+.row-label {
+  flex: none;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+
+.row-check {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  font-size: 1rem;
+  line-height: 26px;
+  cursor: default;
+}
+
+.row-check input[type='checkbox'] {
+  flex: none;
+  margin: 0 2ch 0 0;
+}
+
+.row-unit {
+  flex: none;
+  opacity: 0.7;
+}
+
+.row select {
+  width: 95%;
+  min-width: 160px;
+  max-width: 360px;
+  padding: 2px 4px;
+  border: 1px solid var(--win-input-border);
+  background: var(--win-input-bg);
+  color: var(--win-text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.row input[type='number'] {
+  width: 88px;
+  padding: 2px 6px;
+  border: 1px solid var(--win-input-border);
+  background: var(--win-input-bg);
+  color: var(--win-text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.row input[type='text'] {
+  flex: 0 1 360px;
+  min-width: 120px;
+  padding: 2px 6px;
+  border: 1px solid var(--win-input-border);
+  border-radius: 2px;
+  background: var(--win-input-bg);
+  color: var(--win-text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.row input[type='text']::placeholder {
+  color: var(--win-hint);
+  opacity: 0.7;
+}
+
+/* focus ring, taken from the same skin as the reference panel */
+.row select:focus,
+.row input:focus,
+.search-input:focus {
+  border-color: var(--win-input-focus-border) !important;
+  outline: 0;
+  box-shadow: 0 0 0 1px var(--win-input-focus-ring);
+}
+
+.panel-content-hint {
+  margin-top: 8px;
+  color: var(--win-hint);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.panel-content-hint.row {
+  display: block;
+  margin-left: 12px;
+}
+
+.panel-empty {
+  margin: 56px 0 0;
+  color: var(--win-hint);
+  font-size: 14px;
+}
+
+/* --- welcome ------------------------------------------------------------- */
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--win-panel-bg);
+  color: var(--win-text);
+  user-select: none;
+}
+
+.welcome-main {
+  display: flex;
+  flex: 1 1;
+  padding-top: 16px;
+  overflow-y: auto;
+}
+
+.welcome-left {
+  flex: none;
+}
+
+.welcome-logo {
+  display: block;
+  width: 70px;
+  margin: 8px 24px;
+  color: var(--primary-color);
+}
+
+.welcome-right {
+  flex: 1 1;
+  min-width: 0;
+  padding: 16px 24px 24px 0;
+  overflow-x: hidden;
+}
+
+.welcome-right h1 {
+  margin: 0 0 8px;
+  color: var(--win-strong-text);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.welcome-intro {
+  max-width: 640px;
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+}
+
+.welcome-section {
+  margin-top: 24px;
+}
+
+.welcome-section-title {
+  margin: 0;
+  color: var(--win-strong-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.welcome-hint {
+  margin: 4px 0 0;
+  color: var(--win-hint);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-rows: 90px;
+  grid-gap: 12px;
+  margin-top: 18px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  min-width: 260px;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background: beige;
+  color: #535353;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.feature-item-title {
+  margin: 0.2em 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.feature-item.active {
+  border-color: var(--primary-color);
+}
+
+.feature-item-github {
+  background: #f3f3f3;
+}
+
+.feature-item-night {
+  background: #535353;
+  color: #f3f3f3;
+}
+
+.feature-item-newsprint {
+  background: #f3e0ee;
+}
+
+.feature-item-pixyll {
+  background: #c8e5fb;
+}
+
+.feature-item-whitey {
+  background: #fcffd9;
+}
+
+.guide-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--win-guide-bg);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.guide-item:hover {
+  background: var(--win-guide-hover-bg);
+}
+
+.guide-item-title {
+  display: block;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.guide-item .desc {
+  display: -webkit-box;
+  color: var(--win-hint);
+  margin: 0;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: break-spaces;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.guide-item-link {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  opacity: 0.2;
+}
+
+.guide-item:hover .guide-item-link {
+  opacity: 0.6;
+}
+
+.welcome-footer {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 78px;
+  background: var(--win-footer-bg);
+}
+
+.welcome-footer-left {
+  min-width: 20px;
+  padding-left: 32px;
+  color: var(--win-hint);
+  font-size: 12px;
+}
+
+.welcome-footer-right {
+  padding-right: 32px;
+}
+
+.default-btn {
+  min-width: 106px;
+  height: 32px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  background: #555555;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13.3333px;
+  cursor: pointer;
+}
+
+.default-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}

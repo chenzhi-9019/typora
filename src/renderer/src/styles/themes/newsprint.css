@@ -1,0 +1,290 @@
+/*
+ * Theme: newsprint. Warm paper, serif, narrow measure.
+ *
+ * Block metrics read from tmp/typora-app/app/resources/style/themes/newsprint.css and
+ * base.css. This theme resets list markers to none and re-adds a per-level type, and its
+ * table has no cell borders at all (zebra rows plus a header band instead).
+ */
+body[data-theme='newsprint'] {
+  --bg-color: #f3f2ee;
+  --text-color: #1f0909;
+  --side-bar-bg-color: #f3f2ee;
+  --control-text-color: #444444;
+  --control-text-hover-color: #1f0909;
+  --item-hover-bg-color: #e7e5df;
+  --active-file-bg-color: #dadada;
+  --active-file-text-color: #1f0909;
+  --window-border: 1px solid #dcd8cf;
+  --primary-color: #9b2c2c;
+  --link-color: #065588;
+  --select-text-bg-color: rgba(32, 43, 51, 0.63);
+  --select-text-font-color: #ffffff;
+  --code-block-bg: #dadada;
+  --code-bg: #dadada;
+  --table-border: transparent;
+  --table-header-bg: #dadada;
+  --quote-border: #bababa;
+  --quote-color: #656565;
+  --write-max-width: 40em;
+  --write-font-size: 16px;
+  --write-line-height: 1.5em;
+  --footer-border: 1px solid #dcd8cf;
+  /* highlight.js palette: style/codemirror.css .cm-s-inner */
+  --hljs-keyword: #708;
+  --hljs-builtin: #30a;
+  --hljs-number: #164;
+  --hljs-string: #a11;
+  --hljs-string-2: #f50;
+  --hljs-comment: #a50;
+  --hljs-def: #00f;
+  --hljs-variable: #000;
+  --hljs-variable-2: #05a;
+  --hljs-attribute: #00c;
+  --hljs-property: #000;
+  --hljs-tag: #170;
+  --hljs-meta: #555;
+  --hljs-atom: #219;
+  --hljs-bracket: #997;
+  --hljs-quote: #090;
+  --hljs-link: #00c;
+  --hljs-addition: #292;
+  --hljs-deletion: #d44;
+  --hljs-operator: #981a1a;
+  color-scheme: light;
+}
+
+body[data-theme='newsprint'] #write {
+  font-family: 'PT Serif', Georgia, 'Times New Roman', serif;
+}
+
+/* ------------------------------------------------------------- headings */
+
+body[data-theme='newsprint'] #write h1,
+body[data-theme='newsprint'] #write h2,
+body[data-theme='newsprint'] #write h3,
+body[data-theme='newsprint'] #write h4,
+body[data-theme='newsprint'] #write h5,
+body[data-theme='newsprint'] #write h6 {
+  margin: 1rem 0 1.5em;
+  font-weight: bold;
+}
+
+body[data-theme='newsprint'] #write h1 {
+  margin: 2em 0 0.5em;
+  padding-bottom: 0.8125em;
+  border-bottom: 1px solid #c5c5c5;
+  font-size: 1.875em;
+  line-height: 1.3em;
+  font-weight: normal;
+}
+
+body[data-theme='newsprint'] #write h2 {
+  margin: 2.285714em 0 0.75em;
+  font-size: 1.3125em;
+  line-height: 1.15;
+}
+
+body[data-theme='newsprint'] #write h3 {
+  margin: 2.285714em 0 0.75em;
+  font-size: 1.3125em;
+  line-height: 1.15;
+  font-weight: normal;
+}
+
+body[data-theme='newsprint'] #write h4 {
+  margin: 2.67em 0 1.5em;
+  font-size: 1.125em;
+  line-height: inherit;
+}
+
+body[data-theme='newsprint'] #write h5,
+body[data-theme='newsprint'] #write h6 {
+  font-size: 1em;
+  line-height: inherit;
+}
+
+body[data-theme='newsprint'] #write h6 {
+  color: inherit;
+}
+
+/* ---------------------------------------------------------- paragraphs */
+
+body[data-theme='newsprint'] #write p {
+  margin: 1rem 0 1.5em;
+}
+
+/* --------------------------------------------------------------- lists */
+
+body[data-theme='newsprint'] #write ul,
+body[data-theme='newsprint'] #write ol {
+  margin: 0 0 1.5em;
+  list-style: none;
+}
+
+body[data-theme='newsprint'] #write ul li {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+body[data-theme='newsprint'] #write ol li {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+body[data-theme='newsprint'] #write li ol > li {
+  list-style-type: lower-alpha;
+}
+
+body[data-theme='newsprint'] #write li li ol > li {
+  list-style-type: lower-roman;
+}
+
+body[data-theme='newsprint'] #write li > ul,
+body[data-theme='newsprint'] #write li > ol {
+  margin-top: inherit;
+  margin-bottom: 0;
+}
+
+body[data-theme='newsprint'] #write p + ul,
+body[data-theme='newsprint'] #write p + ol,
+body[data-theme='newsprint'] #write h3 + ul,
+body[data-theme='newsprint'] #write h3 + ol,
+body[data-theme='newsprint'] #write h4 + ul,
+body[data-theme='newsprint'] #write h4 + ol,
+body[data-theme='newsprint'] #write h5 + ul,
+body[data-theme='newsprint'] #write h5 + ol,
+body[data-theme='newsprint'] #write h6 + ul,
+body[data-theme='newsprint'] #write h6 + ol {
+  margin-top: 0.5em;
+}
+
+body[data-theme='newsprint'] #write li.md-task-list-item {
+  padding-left: 1.5rem;
+}
+
+body[data-theme='newsprint'] #write .md-task-list-item > input {
+  margin-left: -1.7em;
+}
+
+/* ------------------------------------------------------------ blockquote */
+
+body[data-theme='newsprint'] #write blockquote {
+  margin: 1rem 0 1.5em 2em;
+  padding-left: 1em;
+  border-left: 5px solid #bababa;
+  color: #656565;
+  font-style: italic;
+}
+
+body[data-theme='newsprint'] #write blockquote ul,
+body[data-theme='newsprint'] #write blockquote ol {
+  margin-left: 0;
+}
+
+/* ------------------------------------------------------------------ code */
+
+body[data-theme='newsprint'] #write code {
+  padding: 0 2px;
+  border: 0;
+  border-radius: 0;
+  background: #dadada;
+  font-size: 0.875em;
+  line-height: 1.714286;
+}
+
+/*
+ * The theme only pads left and right (1ch); the vertical inset in Typora stays at zero
+ * because base.css sets .CodeMirror-lines { padding: 0 }.
+ */
+body[data-theme='newsprint'] #write pre.md-fences {
+  margin: 0 0 3em 2em;
+  padding: 0 1ch;
+  border: 0;
+  border-radius: 0;
+  background: #dadada;
+  /* base.css .md-fences (0,1,0) outranks the theme's "pre" (0,0,1), so fences keep .9rem. */
+  font-size: 0.9em;
+  line-height: 1.714286;
+}
+
+body[data-theme='newsprint'] #write pre.md-fences code {
+  padding: 0;
+  background: transparent;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------------- tables */
+
+body[data-theme='newsprint'] #write table {
+  width: 100%;
+  margin: 0 0 1.5em;
+  font-size: 1em;
+}
+
+body[data-theme='newsprint'] #write table tr {
+  border: 0;
+}
+
+body[data-theme='newsprint'] #write table th,
+body[data-theme='newsprint'] #write table td {
+  padding: 0.25em 0.25em 0.25em 0.4em;
+  border: 0;
+  vertical-align: top;
+}
+
+body[data-theme='newsprint'] #write table th {
+  border-bottom: 0;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+body[data-theme='newsprint'] #write table thead {
+  background-color: #dadada;
+}
+
+body[data-theme='newsprint'] #write table tbody tr:nth-child(even) {
+  background-color: #e8e7e7;
+}
+
+/* -------------------------------------------------- rule, links, images */
+
+body[data-theme='newsprint'] #write hr {
+  height: 0;
+  margin: 2em 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid #c5c5c5;
+  background: none;
+}
+
+body[data-theme='newsprint'] #write a {
+  color: #065588;
+  text-decoration: none;
+}
+
+body[data-theme='newsprint'] #write a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------- front matter */
+
+body[data-theme='newsprint'] #write pre.md-meta-block {
+  min-height: 1.875rem;
+  margin: 1em 0 1.2em 1em;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #555555;
+  font-size: 0.8em;
+}
+
+/* ------------------------------------------------------- maths, mermaid */
+
+body[data-theme='newsprint'] #write .md-math-block {
+  margin: 1rem 0;
+}
+
+body[data-theme='newsprint'] #write .md-diagram {
+  margin-top: 8px;
+}

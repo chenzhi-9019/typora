@@ -1,0 +1,549 @@
+/*
+ * Application chrome: window body, sidebar, status bar, overlays.
+ * Metrics follow Typora 1.14.15 (sidebar 240px, footer 30px with a 1px top rule,
+ * UI text 12-13px). Values are authored here, not copied from Typora's sheets.
+ */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--ui-font);
+  font-size: var(--ui-font-size);
+  color: var(--text-color);
+  background: var(--bg-color);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.typora-app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-color);
+}
+
+/* zoom is applied on the root so the status bar and sidebar scale with the text */
+.typora-app {
+  zoom: 1;
+}
+
+/* ---------------------------------------------------------------- sidebar */
+
+#typora-sidebar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--side-bar-bg-color);
+  border-right: var(--window-border);
+  color: var(--control-text-color);
+  user-select: none;
+}
+
+.sidebar-tabs {
+  display: flex;
+  flex: 0 0 auto;
+  height: 32px;
+  border-bottom: var(--window-border);
+}
+
+.sidebar-tab {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-right: var(--window-border);
+  background: transparent;
+  color: var(--control-text-color);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 32px;
+  text-align: center;
+  cursor: default;
+}
+
+.sidebar-tab:last-child {
+  border-right: 0;
+}
+
+.sidebar-tab:hover {
+  color: var(--control-text-hover-color);
+}
+
+.sidebar-tab.active {
+  background: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+}
+
+.sidebar-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+#file-library,
+#outline-content,
+#file-library-search-panel {
+  padding-bottom: 8px;
+}
+
+.file-library-empty {
+  padding: 18px 16px;
+  color: var(--control-text-color);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.file-library-empty .hint {
+  color: var(--md-char-color);
+}
+
+#file-library-tree {
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.file-library-node {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding-right: 8px;
+  font-size: 13px;
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: default;
+}
+
+.file-library-node:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+.file-library-node.active {
+  background: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+}
+
+.file-node-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  color: var(--control-text-color);
+}
+
+.file-icon {
+  opacity: 0.85;
+}
+
+.file-node-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#outline-content {
+  padding: 6px 0;
+}
+
+.outline-empty {
+  padding: 18px 16px;
+  font-size: 12px;
+  color: var(--md-char-color);
+}
+
+.outline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.outline-item {
+  height: 22px;
+  padding-right: 10px;
+  font-size: 12px;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+.outline-item:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+.outline-h1 { padding-left: 12px; font-weight: 600; }
+.outline-h2 { padding-left: 24px; }
+.outline-h3 { padding-left: 36px; }
+.outline-h4 { padding-left: 48px; }
+.outline-h5 { padding-left: 60px; }
+.outline-h6 { padding-left: 72px; }
+
+#ty-sidebar-footer {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 30px;
+  padding: 0 4px;
+  border-top: var(--window-border);
+}
+
+.sidebar-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--control-text-color);
+  cursor: default;
+}
+
+.sidebar-footer-btn:hover {
+  color: var(--control-text-hover-color);
+  background: var(--item-hover-bg-color);
+}
+
+.sidebar-footer-spacer {
+  flex: 1 1 auto;
+}
+
+/* ------------------------------------------------------------- main region */
+
+.typora-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+}
+
+/* the editor module owns the scrolling surface (.typora-editor-host) */
+.editor-scroll {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg-color);
+}
+
+.editor-host {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------------ footer */
+
+footer.ty-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  height: var(--footer-height);
+  padding: 0 10px 0 5px;
+  border-top: var(--footer-border);
+  background: inherit;
+  color: var(--control-text-color);
+  font-size: 12px;
+  line-height: var(--footer-height);
+  user-select: none;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.footer-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--control-text-color);
+  cursor: default;
+}
+
+.footer-icon-btn:hover {
+  color: var(--control-text-hover-color);
+  background: var(--item-hover-bg-color);
+}
+
+.footer-icon-btn.on {
+  color: var(--primary-color);
+}
+
+.footer-path {
+  display: none;
+}
+
+.footer-stat {
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------- overlays */
+
+.mega-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.mega-menu-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  padding-bottom: 12px;
+  overflow: auto;
+  background: var(--side-bar-bg-color);
+  border-right: var(--window-border);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.12);
+}
+
+.megamenu-menu-header {
+  height: 40px;
+  padding: 0 14px;
+  font-size: 13px;
+  line-height: 40px;
+  color: var(--control-text-hover-color);
+  border-bottom: var(--window-border);
+}
+
+.megamenu-menu-list {
+  margin: 6px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.megamenu-group-title {
+  padding: 6px 14px 2px;
+  font-size: 11px;
+  color: var(--md-char-color);
+}
+
+.megamenu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 28px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: default;
+}
+
+.megamenu-item:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+.megamenu-item.checked .megamenu-item-label::after {
+  content: ' ✓';
+  color: var(--primary-color);
+}
+
+.megamenu-item-shortcut {
+  font-size: 11px;
+  color: var(--md-char-color);
+}
+
+.megamenu-divider {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--window-border);
+  border-top: 0;
+}
+
+.md-searchpanel {
+  position: fixed;
+  top: 8px;
+  right: 20px;
+  z-index: 70;
+  padding: 8px;
+  background: var(--side-bar-bg-color);
+  border: var(--window-border);
+  border-radius: 4px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.16);
+}
+
+.searchpanel-search-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-panel-input {
+  width: 220px;
+  height: 26px;
+  padding: 0 8px;
+  border: var(--window-border);
+  border-radius: 3px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.search-panel-btn {
+  height: 26px;
+  padding: 0 8px;
+  border: var(--window-border);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--control-text-color);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: default;
+}
+
+.search-panel-btn:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--control-text-hover-color);
+}
+
+/* sidebar search panel */
+
+#file-library-search-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+#file-library-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 26px;
+  padding: 0 8px;
+  border: var(--window-border);
+  border-radius: 3px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.search-option-btn {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--control-text-color);
+  font-family: var(--monospace);
+  font-size: 11px;
+  cursor: default;
+}
+
+.search-option-btn.on {
+  background: var(--active-file-bg-color);
+  color: var(--primary-color);
+}
+
+.search-summary {
+  padding: 6px 2px;
+  font-size: 11px;
+  color: var(--md-char-color);
+}
+
+.search-error {
+  padding: 4px 2px;
+  font-size: 11px;
+  color: #c0392b;
+}
+
+#file-library-search-result {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.search-result-item {
+  padding: 4px 4px;
+  border-radius: 3px;
+  cursor: default;
+}
+
+.search-result-item:hover {
+  background: var(--item-hover-bg-color);
+}
+
+.file-list-item-file-name {
+  font-size: 12px;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-line {
+  color: var(--md-char-color);
+}
+
+.file-list-item-summary {
+  font-size: 11px;
+  color: var(--md-char-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-title,
+.boot-hint {
+  display: none;
+}

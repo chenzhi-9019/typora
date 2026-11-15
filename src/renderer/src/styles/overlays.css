@@ -1,0 +1,129 @@
+/* Quick open palette and the word-count popover. */
+
+.ty-quick-open-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 90px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.ty-quick-open {
+  display: flex;
+  flex-direction: column;
+  width: 560px;
+  max-height: 60vh;
+  overflow: hidden;
+  border: var(--window-border);
+  border-radius: 6px;
+  background: var(--side-bar-bg-color);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22);
+}
+
+#typora-quick-open-input {
+  height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-bottom: var(--window-border);
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+#typora-quick-open-list {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 4px 0;
+  overflow: auto;
+  list-style: none;
+}
+
+.ty-quick-open-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 26px;
+  padding: 0 14px;
+  font-size: 12.5px;
+  color: var(--text-color);
+  cursor: default;
+}
+
+.ty-quick-open-item[data-active='true'] {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+.ty-quick-open-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ty-quick-open-hint {
+  flex: 0 0 auto;
+  font-size: 11px;
+  color: var(--md-char-color);
+}
+
+.ty-quick-open-empty {
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--md-char-color);
+}
+
+.ty-word-count {
+  position: absolute;
+  right: 14px;
+  bottom: calc(var(--footer-height) + 8px);
+  z-index: 50;
+  width: 210px;
+  padding: 10px 12px;
+  border: var(--window-border);
+  border-radius: 5px;
+  background: var(--side-bar-bg-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+  font-size: 12px;
+  color: var(--control-text-color);
+}
+
+.ty-word-count-title {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--control-text-hover-color);
+}
+
+.ty-word-count-row {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+  line-height: 20px;
+}
+
+.ty-word-count-value {
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.ty-word-count-close {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 3px 0;
+  border: var(--window-border);
+  border-radius: 4px;
+  background: var(--bg-color);
+  color: var(--control-text-color);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ty-word-count-close:hover {
+  background: var(--item-hover-bg-color);
+}

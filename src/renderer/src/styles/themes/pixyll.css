@@ -1,0 +1,266 @@
+/*
+ * Theme: pixyll. Merriweather body, Lato headings, 914px measure.
+ *
+ * Block metrics read from tmp/typora-app/app/resources/style/themes/pixyll.css and base.css.
+ * That theme sizes its document from html { font-size: 14px } with body { font-size: 1.5rem },
+ * so every length below is restated as a ratio of the 1.25rem paragraph size instead of the
+ * original rem count (63px h1 at a 21px body becomes 3.6em at this project's 16px body).
+ */
+body[data-theme='pixyll'] {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #777777;
+  --control-text-hover-color: #101010;
+  --item-hover-bg-color: #e8e8e8;
+  --active-file-bg-color: #eeeeee;
+  --active-file-text-color: inherit;
+  --window-border: 1px solid #d9d9d9;
+  --primary-color: #e05e43;
+  --link-color: #463f5c;
+  --select-text-bg-color: #f8e2dc;
+  --code-block-bg: transparent;
+  --code-bg: transparent;
+  --table-border: #333333;
+  --quote-border: #7a7a7a;
+  --write-max-width: 914px;
+  --write-font-size: 16px;
+  --write-line-height: 1.75;
+  --footer-border: 1px solid #ddd;
+  /* highlight.js palette: style/codemirror.css .cm-s-inner */
+  --hljs-keyword: #708;
+  --hljs-builtin: #30a;
+  --hljs-number: #164;
+  --hljs-string: #a11;
+  --hljs-string-2: #f50;
+  --hljs-comment: #a50;
+  --hljs-def: #00f;
+  --hljs-variable: #000;
+  --hljs-variable-2: #05a;
+  --hljs-attribute: #00c;
+  --hljs-property: #000;
+  --hljs-tag: #170;
+  --hljs-meta: #555;
+  --hljs-atom: #219;
+  --hljs-bracket: #997;
+  --hljs-quote: #090;
+  --hljs-link: #00c;
+  --hljs-addition: #292;
+  --hljs-deletion: #d44;
+  --hljs-operator: #981a1a;
+  color-scheme: light;
+}
+
+body[data-theme='pixyll'] #write {
+  font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+}
+
+/* ------------------------------------------------------------- headings */
+
+body[data-theme='pixyll'] #write h1,
+body[data-theme='pixyll'] #write h2,
+body[data-theme='pixyll'] #write h3,
+body[data-theme='pixyll'] #write h4,
+body[data-theme='pixyll'] #write h5,
+body[data-theme='pixyll'] #write h6 {
+  margin: 1em 0 0.5em;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+body[data-theme='pixyll'] #write h1 {
+  font-size: 3.6em;
+}
+
+body[data-theme='pixyll'] #write h2 {
+  font-size: 1.83em;
+}
+
+body[data-theme='pixyll'] #write h3 {
+  font-size: 1.52em;
+}
+
+body[data-theme='pixyll'] #write h4 {
+  font-size: 1.27em;
+}
+
+body[data-theme='pixyll'] #write h5,
+body[data-theme='pixyll'] #write h6 {
+  font-size: 0.9em;
+  color: inherit;
+}
+
+/* The theme scales headings down at 64em (1024px) and again at 48em (768px). */
+@media (max-width: 64em) {
+  body[data-theme='pixyll'] #write h1 {
+    font-size: 2.6em;
+  }
+
+  body[data-theme='pixyll'] #write h2 {
+    font-size: 1.838em;
+  }
+
+  body[data-theme='pixyll'] #write h3 {
+    font-size: 1.3em;
+  }
+
+  body[data-theme='pixyll'] #write h4 {
+    font-size: 1.04em;
+  }
+}
+
+@media (max-width: 48em) {
+  body[data-theme='pixyll'] #write h1 {
+    font-size: 2.262em;
+  }
+
+  body[data-theme='pixyll'] #write h2 {
+    font-size: 1.599em;
+  }
+
+  body[data-theme='pixyll'] #write h3 {
+    font-size: 1.13em;
+  }
+}
+
+/* ---------------------------------------------------------- paragraphs */
+
+body[data-theme='pixyll'] #write p {
+  margin: 1rem 0;
+}
+
+/* ------------------------------------------------------------ blockquote */
+
+body[data-theme='pixyll'] #write blockquote {
+  margin: 1rem 0;
+  padding: 1.33em;
+  border-left: 5px solid #7a7a7a;
+  color: #555555;
+  font-style: italic;
+}
+
+body[data-theme='pixyll'] #write blockquote em {
+  color: #000000;
+}
+
+/* --------------------------------------------------------------- lists */
+
+body[data-theme='pixyll'] #write li.md-task-list-item {
+  padding-left: 34px;
+}
+
+body[data-theme='pixyll'] #write .md-task-list-item > input {
+  margin-left: -1.6em;
+}
+
+/* ------------------------------------------------------------------ code */
+
+body[data-theme='pixyll'] #write code {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #7a7a7a;
+  font-size: 1em;
+}
+
+body[data-theme='pixyll'] #write pre.md-fences {
+  margin: 0 0 0.88em;
+  padding: 0.5em 1.125em;
+  border: 1px solid #7a7a7a;
+  border-radius: 0;
+  background: transparent;
+  color: #7a7a7a;
+  font-size: 0.8em;
+}
+
+body[data-theme='pixyll'] #write pre.md-fences code {
+  padding: 0;
+  color: inherit;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------------- tables */
+
+body[data-theme='pixyll'] #write table {
+  width: 100%;
+}
+
+body[data-theme='pixyll'] #write table tr {
+  border: 0;
+}
+
+body[data-theme='pixyll'] #write table th,
+body[data-theme='pixyll'] #write table td {
+  padding: 12px;
+  border: 0;
+  border-top: 1px solid #333333;
+  line-height: 1.2;
+  vertical-align: top;
+}
+
+body[data-theme='pixyll'] #write table thead th {
+  border-bottom: 2px solid #333333;
+  vertical-align: bottom;
+}
+
+body[data-theme='pixyll'] #write table thead tr:first-child th {
+  border-top: 0;
+}
+
+body[data-theme='pixyll'] #write table tbody + tbody {
+  border-top: 2px solid #333333;
+}
+
+/* -------------------------------------------------- rule, links, images */
+
+/* No hr rule in the theme, so the user-agent rule (inset 1px, .5em auto) is the original. */
+body[data-theme='pixyll'] #write hr {
+  height: 0;
+  margin: 0.5em auto;
+  border: 1px inset;
+  background: none;
+}
+
+body[data-theme='pixyll'] #write img {
+  width: auto;
+  max-width: 100%;
+}
+
+body[data-theme='pixyll'] #write a {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------- front matter */
+
+/*
+ * The original paints a full-bleed band (100vw, negative margin, 30px side borders) and
+ * pushes it up 2010px so it also covers the page's top padding. The band and its bleed are
+ * reproduced; the vertical overhang is left to the write container's own padding.
+ */
+body[data-theme='pixyll'] #write pre.md-meta-block {
+  min-height: 35px;
+  margin: 0 -30px 2em;
+  padding: 8px 30px 10px;
+  border: 0;
+  border-radius: 0;
+  background: #fafafa;
+  color: #7a7a7a;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  white-space: pre;
+}
+
+/* ------------------------------------------------------- maths, mermaid */
+
+body[data-theme='pixyll'] #write .md-math-block {
+  margin: 1rem 0;
+}
+
+body[data-theme='pixyll'] #write .md-diagram {
+  margin-top: 24px;
+}

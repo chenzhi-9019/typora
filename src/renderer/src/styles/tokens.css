@@ -1,0 +1,55 @@
+/*
+ * Design tokens.
+ *
+ * The variable contract is Typora's own (a theme overrides :root and the shell
+ * and editor pick it up), but every declaration below is authored here from the
+ * measured behaviour of Typora 1.14.15. See codespec/specs/design.md.
+ */
+
+:root {
+  /* text + surfaces */
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #777777;
+  --control-text-hover-color: #101010;
+  --item-hover-bg-color: #e8e8e8;
+  --item-hover-text-color: inherit;
+  --active-file-bg-color: #eeeeee;
+  --active-file-text-color: inherit;
+  --active-file-border-color: #f3c49e;
+  --select-text-bg-color: #b5d6fc;
+  --select-text-font-color: auto;
+  --search-select-bg-color: #d6e6f7;
+  --window-border: 1px solid #d9d9d9;
+  --rawblock-edit-panel-bd: transparent;
+
+  /* accents */
+  --primary-color: #428bca;
+  --primary-btn-border-color: #285e8e;
+  --primary-btn-text-color: #ffffff;
+  --md-char-color: #b8b8b8;
+  --meta-content-color: #757575;
+  --link-color: var(--primary-color);
+
+  /* type */
+  --monospace: 'Lucida Console', Consolas, 'Courier New', monospace;
+  --ui-font: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  --ui-font-size: 13px;
+
+  /* shell metrics */
+  --title-bar-height: 28px;
+  --sidebar-width: 240px;
+  --footer-height: 30px;
+  --footer-border: 1px solid #ddd;
+  --tabbar-height: 34px;
+  --tree-indent: 16px;
+
+  /* editor metrics */
+  --write-max-width: 860px;
+  --write-padding: 30px;
+})
+
+body.dark {
+  color-scheme: dark;
+}

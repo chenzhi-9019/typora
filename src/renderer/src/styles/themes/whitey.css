@@ -1,0 +1,261 @@
+/*
+ * Theme: whitey. Large serif reading measure, 960px.
+ *
+ * Block metrics read from tmp/typora-app/app/resources/style/themes/whitey.css and base.css.
+ * That theme sets html { font-size: 19px } and inherits it into the document, so the base.css
+ * rem values it keeps are restated in em (1em = the 19px body size here).
+ */
+body[data-theme='whitey'] {
+  --bg-color: #ffffff;
+  --text-color: #444444;
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #777777;
+  --control-text-hover-color: #101010;
+  --item-hover-bg-color: #e8e8e8;
+  --active-file-bg-color: #eeeeee;
+  --active-file-text-color: inherit;
+  --window-border: 1px solid #e3e3e3;
+  --primary-color: #2b6cb0;
+  --link-color: #2484c1;
+  --select-text-bg-color: #c9dcf0;
+  --code-block-bg: #ffffff;
+  --code-bg: #ffffff;
+  --table-border: #dddddd;
+  --quote-border: #dddddd;
+  --write-max-width: 960px;
+  --write-font-size: 19px;
+  --write-line-height: 1.53;
+  --footer-border: 1px solid #e3e3e3;
+  /* highlight.js palette: style/codemirror.css .cm-s-inner */
+  --hljs-keyword: #708;
+  --hljs-builtin: #30a;
+  --hljs-number: #164;
+  --hljs-string: #a11;
+  --hljs-string-2: #f50;
+  --hljs-comment: #a50;
+  --hljs-def: #00f;
+  --hljs-variable: #000;
+  --hljs-variable-2: #05a;
+  --hljs-attribute: #00c;
+  --hljs-property: #000;
+  --hljs-tag: #170;
+  --hljs-meta: #555;
+  --hljs-atom: #219;
+  --hljs-bracket: #997;
+  --hljs-quote: #090;
+  --hljs-link: #00c;
+  --hljs-addition: #292;
+  --hljs-deletion: #d44;
+  --hljs-operator: #981a1a;
+  color-scheme: light;
+}
+
+body[data-theme='whitey'] #write {
+  font-family: 'Vollkorn', Palatino, 'Palatino Linotype', 'Times New Roman', serif;
+}
+
+/* ------------------------------------------------------------- headings */
+
+body[data-theme='whitey'] #write h1,
+body[data-theme='whitey'] #write h2,
+body[data-theme='whitey'] #write h3,
+body[data-theme='whitey'] #write h4,
+body[data-theme='whitey'] #write h5,
+body[data-theme='whitey'] #write h6 {
+  margin: 1em 0;
+  line-height: inherit;
+}
+
+body[data-theme='whitey'] #write h1 {
+  margin-top: 1.6em;
+  font-size: 3em;
+  font-weight: normal;
+}
+
+body[data-theme='whitey'] #write h2 {
+  margin-top: 2em;
+  font-size: 1.8em;
+  font-weight: normal;
+}
+
+body[data-theme='whitey'] #write h3 {
+  margin-top: 3em;
+  font-size: 1.6em;
+  font-style: italic;
+  font-weight: normal;
+}
+
+body[data-theme='whitey'] #write h4 {
+  font-size: 1.4em;
+}
+
+body[data-theme='whitey'] #write h5 {
+  font-size: 1.2em;
+}
+
+body[data-theme='whitey'] #write h6 {
+  font-size: 1em;
+  color: inherit;
+}
+
+body[data-theme='whitey'] #write h1,
+body[data-theme='whitey'] #write h2,
+body[data-theme='whitey'] #write h3 {
+  text-align: center;
+}
+
+body[data-theme='whitey'] #write h2::after {
+  display: block;
+  width: 100px;
+  height: 1px;
+  margin: 0 auto;
+  border-bottom: 1px solid #2f2f2f;
+  content: '';
+}
+
+body[data-theme='whitey'] #write h1 + h2,
+body[data-theme='whitey'] #write h2 + h3 {
+  margin-top: 0.83em;
+}
+
+/* ---------------------------------------------------------- paragraphs */
+
+body[data-theme='whitey'] #write p {
+  margin: 0 0 1em;
+}
+
+/* --------------------------------------------------------------- lists */
+
+body[data-theme='whitey'] #write ul {
+  list-style: square;
+}
+
+body[data-theme='whitey'] #write li.md-task-list-item {
+  padding-left: 1.6rem;
+}
+
+body[data-theme='whitey'] #write .md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+/* ------------------------------------------------------------ blockquote */
+
+body[data-theme='whitey'] #write blockquote {
+  margin: 1em 0 1em 1em;
+  padding-left: 1em;
+  border-left: 1px solid #ddd;
+  color: inherit;
+}
+
+/* ------------------------------------------------------------------ code */
+
+body[data-theme='whitey'] #write code {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #ffffff;
+  font-size: 0.9em;
+}
+
+body[data-theme='whitey'] #write pre.md-fences {
+  margin: 0 0 1.5em 1em;
+  padding: 6px 0 8px 1em;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #ffffff;
+  font-size: 0.9em;
+}
+
+body[data-theme='whitey'] #write pre.md-fences code {
+  padding: 0;
+  background: transparent;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------------- tables */
+
+body[data-theme='whitey'] #write table {
+  width: 100%;
+  margin: 0 0 1.333em;
+}
+
+body[data-theme='whitey'] #write table tr {
+  border: 0;
+}
+
+body[data-theme='whitey'] #write table th,
+body[data-theme='whitey'] #write table td {
+  padding: 8px;
+  border: 0;
+  border-top: 1px solid #ddd;
+  line-height: 1.333;
+  vertical-align: top;
+}
+
+body[data-theme='whitey'] #write table th {
+  border-bottom: 0;
+  font-weight: bold;
+}
+
+body[data-theme='whitey'] #write table thead th {
+  vertical-align: bottom;
+}
+
+body[data-theme='whitey'] #write table thead tr:first-child th {
+  border-top: 0;
+}
+
+body[data-theme='whitey'] #write table tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+
+/* -------------------------------------------------- rule, links, images */
+
+body[data-theme='whitey'] #write hr {
+  height: 1px;
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+  background: none;
+  color: #ddd;
+}
+
+body[data-theme='whitey'] #write a {
+  color: #2484c1;
+  text-decoration: none;
+}
+
+body[data-theme='whitey'] #write a:hover {
+  text-decoration: underline;
+}
+
+body[data-theme='whitey'] #write h1 a,
+body[data-theme='whitey'] #write h1 a:hover {
+  color: #333333;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------- front matter */
+
+/*
+ * The original pulls the band 1.333rem up (over the page's top padding) and bleeds it with
+ * a 100vw width plus 30px side borders; the pull and a negative side margin reproduce both.
+ */
+body[data-theme='whitey'] #write pre.md-meta-block {
+  min-height: 35px;
+  margin: -1.333em -30px 2em;
+  padding: 26px 30px 10px;
+  border: 0;
+  border-radius: 0;
+  background: #f8f8f8;
+  color: #999999;
+  font-size: 0.76em;
+  line-height: 1.8em;
+  white-space: pre;
+}
+
+/* ------------------------------------------------------- maths, mermaid */
+
+body[data-theme='whitey'] #write .md-math-block {
+  margin: 1rem 0;
+}

@@ -1,0 +1,584 @@
+/*
+ * Sidebar chrome: segmented tabs, file tree rows, outline, sidebar footer, megamenu.
+ * Values measured against Typora 1.14.15; structure rules for the shared shell
+ * live in shell.css, this file only owns the sidebar surface.
+ *
+ * Every metric below cites the reference rule that produced it
+ * (tmp/typora-app/app/resources/style/<file>.css). Colours come from tokens.css
+ * only; nothing here hardcodes a colour value.
+ */
+
+/* ------------------------------------------------------------------- shell */
+
+/* base-control.css: #typora-sidebar { font-size: 14px } */
+#typora-sidebar {
+  font-size: 14px;
+  /* tree indentation: the 8px list inset in #file-library-tree plus the 8px
+     .file-tree-node padding every nesting level adds; --tree-depth is bound
+     per row by FileTree.vue */
+  --sidebar-tree-inset: 8px;
+  --sidebar-tree-step: 8px;
+  --tree-depth: 0;
+}
+
+/* window.css: .sidebar-content { display: flex; flex-direction: column } */
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: inherit;
+}
+
+/* window.css: .sidebar-content-content { min-width: 100% } */
+.sidebar-content > * {
+  flex: 1 1 auto;
+  min-width: 100%;
+  min-height: 0;
+}
+
+/* ------------------------------------------------------------------- tabs */
+
+/* base-control.css: .sidebar-tabs { display: flex; border-bottom: var(--window-border);
+   text-align: center; white-space: nowrap; overflow-x: auto; overflow-y: hidden }
+   base-control.css: .sidebar-tab { flex: 1; line-height: 40px; text-transform: uppercase }
+   window.css: .info-panel-tab { opacity: .8 } / .info-panel-tab:hover { color: var(--text-color) }
+   window.css: .info-panel-tab-border { height: 4px; background-color: currentColor } */
+.sidebar-tabs {
+  display: flex;
+  flex: 0 0 auto;
+  height: 40px;
+  border-bottom: var(--window-border);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-tab {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--control-text-color);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  /* 40px row from .sidebar-tab, minus the 4px active rule below the text */
+  line-height: 36px;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.8;
+  cursor: default;
+}
+
+.sidebar-tab:hover {
+  color: var(--text-color);
+  opacity: 1;
+}
+
+/* window.css: .active-tab-files #info-panel-tab-file { font-weight: 700; opacity: 1 } */
+.sidebar-tab.active {
+  background: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+  font-weight: 700;
+  opacity: 1;
+  box-shadow: inset 0 -4px 0 currentColor;
+}
+
+/* --------------------------------------------------------------- file tree */
+
+/* window.css: #file-library { flex: 1; overflow-y: auto; padding-bottom: 8px } */
+#file-library {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 8px;
+}
+
+/* base-control.css: #file-library-tree { padding-left: 8px; padding-right: 4px; user-select: none }
+   base-control.css: .file-tree-node { padding-left: 8px } -> 8px per nesting level */
+#file-library-tree {
+  min-width: 100%;
+  margin: 0;
+  padding: 0 4px 0 8px;
+  list-style: none;
+  user-select: none;
+}
+
+/* base-control.css: .file-node-content { padding-top: 4px; padding-right: 32px; line-height: 22px }
+   -> 26px row, 8px indent step on top of the 8px list inset */
+.file-library-node {
+  height: 26px;
+  gap: 0;
+  padding-top: 4px;
+  padding-right: 32px;
+  padding-left: calc(var(--sidebar-tree-inset) + var(--tree-depth, 0) * var(--sidebar-tree-step));
+  font-size: inherit;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* base-control.css: .file-node-content:hover { color: var(--control-text-hover-color) }
+   the reference tree has no hover surface, only the text colour */
+.file-library-node:hover {
+  background: transparent;
+  color: var(--control-text-hover-color);
+}
+
+/* base-control.css: .file-tree-node.active > .file-node-background {
+     background-color: var(--active-file-bg-color);
+     border-left: 4px solid; border-color: var(--active-file-border-color) }
+   painted as an inset shadow because the reference draws the rule on an
+   absolutely positioned layer, i.e. it must not shift the row's indent */
+.file-library-node.active {
+  background: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+  box-shadow: inset 4px 0 0 var(--active-file-border-color);
+}
+
+/* base-control.css: .file-node-icon, .file-node-open-state { line-height: 22px; min-height: 22px }
+   base-control.css: .file-node-icon { margin-right: 4px }, glyphs render at 14px */
+.file-library-node > .file-node-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 22px;
+  margin-right: 4px;
+  color: inherit;
+  opacity: 1;
+}
+
+/* base-control.css: .file-node-open-state { display: block; min-width: 8px; line-height: 22px } */
+.file-library-node > .file-node-icon:not(.file-icon) {
+  width: 8px;
+  margin-right: 0;
+}
+
+.file-library-node > .file-node-icon:not(.file-icon) svg {
+  width: 8px;
+  height: 8px;
+}
+
+/* base-control.css: .file-node-title { display: block; overflow: hidden }
+   the reference tree itself scrolls horizontally (body.allow-file-tree-scroll),
+   this sidebar does not, so the name is clipped with an ellipsis */
+.file-library-node > .file-node-name {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ----------------------------------------------------------------- outline */
+
+/* base-control.css: .outline-content { padding: 3px 18px; overflow-x: hidden; overflow-y: auto }
+   window.css: #outline-content { line-height: 1.1rem } */
+#outline-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 3px 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  line-height: 1.1rem;
+}
+
+.outline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* base.css: .outline-item { padding-top: 3px; padding-bottom: 3px }
+   base-control.css: .no-collapse-outline .outline-item { margin-top: 1px; margin-bottom: 2px }
+   height/weight are reset because shell.css pins 22px and bolds h1; the reference
+   lets the 17.6px line box size the row and only the active item is bold */
+.outline-item {
+  height: auto;
+  margin: 1px 0 2px;
+  padding: 3px 0;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+/* base.css: .outline-item:hover { background-color: var(--item-hover-bg-color);
+     margin-left: -28px; margin-right: -28px;
+     border-left: 28px solid transparent; border-right: 28px solid transparent }
+   the negative margins and transparent borders cancel out, which bleeds the
+   hover surface across the 18px gutter without moving the label */
+.outline-item:hover {
+  margin-left: -28px;
+  margin-right: -28px;
+  border-left: 28px solid transparent;
+  border-right: 28px solid transparent;
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+/* base.css: .outline-h2 > .outline-item { padding-left: 1em } ... .outline-h6 { padding-left: 5em } */
+.outline-item.outline-h1 {
+  padding-left: 0;
+}
+
+.outline-item.outline-h2 {
+  padding-left: 1em;
+}
+
+.outline-item.outline-h3 {
+  padding-left: 2em;
+}
+
+.outline-item.outline-h4 {
+  padding-left: 3em;
+}
+
+.outline-item.outline-h5 {
+  padding-left: 4em;
+}
+
+.outline-item.outline-h6 {
+  padding-left: 5em;
+}
+
+/* base-control.css: .pin-outline .outline-active { font-weight: 700 } */
+.outline-item.outline-active {
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------ search panel */
+
+/* window.css: .ty-sidebar-search-panel { padding: 16px; padding-top: 0 }
+   base-control.css: .ty-on-search #file-library-search-panel { border-bottom: none }
+   the results live in the same panel here, so the input row owns that padding */
+#file-library-search-panel {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.search-input-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 0 16px 16px;
+}
+
+/* window.css: #file-library-search-input { width: 100%; height: 24px; padding-right: 64px }
+   base-control.css: input { padding-left: 4px; border: 1px solid } - the reference never
+   declares a radius for this input (it carries no .form-control class) */
+#file-library-search-input {
+  width: 100%;
+  height: 24px;
+  padding: 0 64px 0 4px;
+  border: var(--window-border);
+  border-radius: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+/* base-control.css: #file-library-search-input:focus { border-color: var(--primary-color) } */
+#file-library-search-input:focus {
+  border-color: var(--primary-color);
+}
+
+/* base-control.css: .searchpanel-search-option-btn {
+     padding: 1px; border-radius: 3px; line-height: 10px; border: 1px solid }
+   base-control.css: .ty-sidebar-search-panel .searchpanel-search-option-btn {
+     top: 4px; opacity: .5; border: none }
+   base-control.css: .ty-sidebar-search-panel svg.icon { width: 20px; height: 14px }
+   -> 22x16 button (20x14 glyph inside 1px padding), offset from the panel edge */
+.search-option-btn {
+  position: absolute;
+  top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--control-text-color);
+  font-family: var(--monospace);
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* base-control.css: #filesearch-case-option-btn { right: 64px }
+   #filesearch-word-option-btn { right: 42px } #filesearch-regexp-option-btn { right: 20px } */
+.search-option-btn:nth-of-type(1) {
+  right: 64px;
+}
+
+.search-option-btn:nth-of-type(2) {
+  right: 42px;
+}
+
+.search-option-btn:nth-of-type(3) {
+  right: 20px;
+}
+
+/* base-control.css: .ty-sidebar-search-panel .searchpanel-search-option-btn.select,
+   .ty-sidebar-search-panel .searchpanel-search-option-btn:hover {
+     background: var(--active-file-bg-color); color: var(--active-file-text-color); opacity: 1 } */
+.search-option-btn.on,
+.search-option-btn:hover {
+  background: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+  opacity: 1;
+}
+
+.search-summary {
+  padding: 0 16px 6px;
+  font-size: 11px;
+  color: var(--md-char-color);
+}
+
+.search-error {
+  padding: 0 16px 6px;
+  font-size: 11px;
+}
+
+/* base-control.css: .ty-on-search #file-library-search-result { padding-bottom: 32px } */
+#file-library-search-result {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0 0 32px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+/* base-control.css: .ty-search-item { padding: 0; border-bottom: var(--window-border) }
+   base-control.css: .ty-search-item-summary { line-height: 20px; padding-top: 6px } */
+.search-result-item {
+  padding: 6px 0 0;
+  border-bottom: var(--window-border);
+  border-radius: 0;
+  line-height: 20px;
+  cursor: default;
+}
+
+/* base-control.css: .ty-search-item-line:hover, .ty-search-item.active {
+     background: var(--active-file-bg-color); color: var(--active-file-text-color) } */
+.search-result-item:hover {
+  background: var(--active-file-bg-color);
+  color: var(--active-file-text-color);
+}
+
+/* base-control.css: .file-list-item-file-name { font-weight: 700; line-height: 20px;
+     white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+   base-control.css: .ty-search-item-summary { font-size: 13.5px }
+   base-control.css: .ty-search-item-summary .file-list-item-file-name {
+     margin-bottom: 0; padding-left: 24px } */
+.file-list-item-file-name {
+  padding-left: 24px;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* base-control.css: .ty-search-item-line { padding: 3px 0 3px 24px; font-size: 13px }
+   base-control.css: .ty-search-item-line span { opacity: .8 } */
+.file-list-item-summary {
+  padding: 3px 0 3px 24px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 18px;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.8;
+}
+
+.search-line {
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------------------- footer bar */
+
+/* window.css: .sidebar-footer { height: 30px; border-top: 1px solid #ddd; font-size: 12px }
+   base-control.css: .sidebar-footer-item { font-size: 12px; line-height: 28px }
+   base-control.css: .footer-btn { padding-left: 8px; padding-right: 8px; opacity: .8 }
+   base-control.css: .footer-item:hover { background: var(--item-hover-bg-color);
+     color: var(--item-hover-text-color) } */
+#ty-sidebar-footer {
+  height: 30px;
+  padding: 0 4px;
+  border-top: var(--window-border);
+  background: inherit;
+  font-size: 12px;
+  line-height: 28px;
+}
+
+/* 14px glyph + 8px padding on each side = the reference footer button box */
+.sidebar-footer-btn {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--control-text-color);
+  opacity: 0.8;
+  cursor: default;
+}
+
+.sidebar-footer-btn:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- megamenu */
+
+/* megamenu.css: .megamenu-menu { width: 240px;
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.1) }
+   the shadow is derived from --text-color so a dark theme gets a dark shadow */
+.mega-menu-panel {
+  width: 240px;
+  padding-bottom: 12px;
+  background: var(--side-bar-bg-color);
+  color: var(--control-text-color);
+  border-right: var(--window-border);
+  box-shadow:
+    0 2px 5px 0 color-mix(in srgb, var(--text-color) 16%, transparent),
+    0 2px 10px 0 color-mix(in srgb, var(--text-color) 10%, transparent);
+}
+
+/* megamenu.css: .megamenu-menu-header { height: 90px; border-bottom: 1px solid; text-align: center }
+   megamenu.css: #megamenu-menu-header-title { height: 32px; line-height: 32px; font-size: 18px }
+   the reference puts the title 28px below the panel top */
+.megamenu-menu-header {
+  height: 90px;
+  padding: 28px 14px 0;
+  border-bottom: var(--window-border);
+  background: transparent;
+  text-align: center;
+}
+
+#megamenu-menu-header-title {
+  display: block;
+  height: 32px;
+  color: var(--control-text-hover-color);
+  font-size: 18px;
+  line-height: 32px;
+}
+
+/* megamenu.css: .megamenu-menu-list { display: block; width: 100%; border: 0;
+     box-shadow: none; background-color: transparent }
+   megamenu.css: .megamenu-menu-list li { line-height: 44px }
+   base-control.css: .dropdown-menu > li { font-size: 13px } */
+.megamenu-menu-list {
+  width: 100%;
+  /* bootstrap .dropdown-menu { margin: 2px 0 0 }, kept by the reference list */
+  margin: 2px 0 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  list-style: none;
+}
+
+.megamenu-menu-list > li {
+  font-size: 13px;
+  line-height: 44px;
+}
+
+/* megamenu.css: .megamenu-menu-list li a { height: 44px; line-height: 44px; padding-left: 32px }
+   megamenu.css: .megamenu-menu-list li a:hover, li a.active {
+     background-color: var(--item-hover-bg-color); color: var(--item-hover-text-color) } */
+.megamenu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  padding: 0 14px 0 32px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 44px;
+  text-align: left;
+  cursor: default;
+}
+
+.megamenu-item:hover {
+  background: var(--item-hover-bg-color);
+  color: var(--item-hover-text-color);
+}
+
+/* base-control.css: .menuitem-group-label { padding-left: 8px }
+   base-control.css: .menuitem-group-label > .label { opacity: .6; font-size: 11px }
+   the megamenu itself has no group label, so the row height is not the 44px
+   item height but the 28px footer-bar line the sidebar uses */
+.megamenu-menu-list > .megamenu-group-title {
+  padding: 0 0 0 8px;
+  color: var(--control-text-color);
+  font-size: 11px;
+  line-height: 28px;
+  opacity: 0.6;
+}
+
+/* base-control.css: .dropdown-menu .divider { border-top: var(--window-border);
+     background: 0 0; opacity: .5 }
+   window.css: .dropdown-menu .divider { margin: 4px 0 } */
+.megamenu-divider {
+  height: 0;
+  margin: 4px 0;
+  background: transparent;
+  border-top: var(--window-border);
+  opacity: 0.5;
+}
+
+/* base-control.css: .ty-menu-shortcut { float: right; line-height: inherit;
+     font-size: .9em; opacity: .7 } - margin-left: auto right-aligns it in the flex row */
+.megamenu-item-shortcut {
+  margin-left: auto;
+  color: var(--control-text-color);
+  font-family: var(--ui-font);
+  font-size: 0.9em;
+  line-height: inherit;
+  opacity: 0.7;
+}
+
+/* megamenu.css: #m-saved .fa { float: right; font-size: 1.1rem } */
+.megamenu-item.checked .megamenu-item-label::after {
+  content: none;
+}
+
+.megamenu-item.checked::after {
+  content: '\2713';
+  margin-left: auto;
+  padding-left: 8px;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  line-height: 1;
+}

@@ -1,0 +1,232 @@
+/*
+ * Theme: github. Light, sans-serif, 860px measure.
+ *
+ * Block metrics read from tmp/typora-app/app/resources/style/themes/github.css and
+ * base.css; only declarations those files make are restated here.
+ */
+body[data-theme='github'] {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #777777;
+  --control-text-hover-color: #101010;
+  --item-hover-bg-color: #e8e8e8;
+  --active-file-bg-color: #eeeeee;
+  --active-file-text-color: inherit;
+  --window-border: 1px solid #d9d9d9;
+  --primary-color: #4183c4;
+  --link-color: #4183c4;
+  --select-text-bg-color: #b5d6fc;
+  --select-text-font-color: auto;
+  --code-block-bg: #f8f8f8;
+  --code-bg: #f3f4f4;
+  --table-border: #dfe2e5;
+  --quote-border: #dfe2e5;
+  --heading-border: 1px solid #eeeeee;
+  --meta-content-color: #777777;
+  --write-max-width: 860px;
+  --write-font-size: 16px;
+  --write-line-height: 1.6;
+  --footer-border: 1px solid #ddd;
+  /* highlight.js palette: style/codemirror.css .cm-s-inner */
+  --hljs-keyword: #708;
+  --hljs-builtin: #30a;
+  --hljs-number: #164;
+  --hljs-string: #a11;
+  --hljs-string-2: #f50;
+  --hljs-comment: #a50;
+  --hljs-def: #00f;
+  --hljs-variable: #000;
+  --hljs-variable-2: #05a;
+  --hljs-attribute: #00c;
+  --hljs-property: #000;
+  --hljs-tag: #170;
+  --hljs-meta: #555;
+  --hljs-atom: #219;
+  --hljs-bracket: #997;
+  --hljs-quote: #090;
+  --hljs-link: #00c;
+  --hljs-addition: #292;
+  --hljs-deletion: #d44;
+  --hljs-operator: #981a1a;
+  color-scheme: light;
+}
+
+body[data-theme='github'] #write {
+  font-family:
+    'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', 'SF Pro',
+    sans-serif;
+}
+
+/* ------------------------------------------------------------- headings */
+
+body[data-theme='github'] #write h1,
+body[data-theme='github'] #write h2,
+body[data-theme='github'] #write h3,
+body[data-theme='github'] #write h4,
+body[data-theme='github'] #write h5,
+body[data-theme='github'] #write h6 {
+  margin: 1rem 0;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+body[data-theme='github'] #write h1 {
+  padding-bottom: 0;
+  border-bottom: 1px solid #eee;
+  font-size: 2.25em;
+  line-height: 1.2;
+}
+
+body[data-theme='github'] #write h2 {
+  border-bottom: 1px solid #eee;
+  font-size: 1.75em;
+  line-height: 1.225;
+}
+
+body[data-theme='github'] #write h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+body[data-theme='github'] #write h4 {
+  font-size: 1.25em;
+}
+
+body[data-theme='github'] #write h5 {
+  font-size: 1em;
+}
+
+body[data-theme='github'] #write h6 {
+  font-size: 1em;
+  color: #777777;
+}
+
+/* -------------------------------------------------------- text and lists */
+
+body[data-theme='github'] #write p,
+body[data-theme='github'] #write blockquote,
+body[data-theme='github'] #write ul,
+body[data-theme='github'] #write ol,
+body[data-theme='github'] #write table {
+  margin: 0.8em 0;
+}
+
+body[data-theme='github'] #write li > ul,
+body[data-theme='github'] #write li > ol {
+  margin: 0;
+}
+
+body[data-theme='github'] #write li.md-task-list-item {
+  padding-left: 0;
+}
+
+body[data-theme='github'] #write .md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+/* ------------------------------------------------------------ blockquote */
+
+body[data-theme='github'] #write blockquote {
+  padding: 0 15px;
+  border-left: 4px solid #dfe2e5;
+  color: #777777;
+}
+
+body[data-theme='github'] #write blockquote blockquote {
+  padding-right: 0;
+}
+
+/* ------------------------------------------------------------------ code */
+
+body[data-theme='github'] #write code {
+  padding: 0 2px;
+  border: 1px solid #e7eaed;
+  border-radius: 3px;
+  background: #f3f4f4;
+  font-size: 0.9em;
+}
+
+body[data-theme='github'] #write pre.md-fences {
+  margin: 15px 0;
+  padding: 8px 4px 6px;
+  border: 1px solid #e7eaed;
+  border-radius: 3px;
+  background: #f8f8f8;
+  font-size: 0.9em;
+}
+
+body[data-theme='github'] #write pre.md-fences code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 1em;
+}
+
+/* ---------------------------------------------------------------- tables */
+
+body[data-theme='github'] #write table {
+  width: 100%;
+  padding: 0;
+  word-break: initial;
+}
+
+body[data-theme='github'] #write table tr {
+  border: 1px solid #dfe2e5;
+}
+
+body[data-theme='github'] #write table thead,
+body[data-theme='github'] #write table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+body[data-theme='github'] #write table th,
+body[data-theme='github'] #write table td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+body[data-theme='github'] #write table th {
+  border-bottom: 0;
+  font-weight: bold;
+}
+
+/* -------------------------------------------------- rule, links, images */
+
+body[data-theme='github'] #write hr {
+  height: 2px;
+  margin: 16px 0;
+  padding: 0;
+  border: 0 none;
+  background-color: #e7e7e7;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+body[data-theme='github'] #write a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+body[data-theme='github'] #write a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------- front matter */
+
+body[data-theme='github'] #write pre.md-meta-block {
+  margin-top: 0;
+  padding: 1rem;
+  border: 0;
+  border-radius: 3px;
+  background-color: #f7f7f7;
+  color: #777777;
+  font-size: 85%;
+  line-height: 1.45;
+}
+
+/* ------------------------------------------------------- maths, mermaid */
+
+body[data-theme='github'] #write .md-math-block {
+  margin: 1rem 0;
+}
