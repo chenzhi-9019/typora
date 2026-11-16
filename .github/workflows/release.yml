@@ -64,9 +64,20 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.tag }}
-          name: ${{ steps.version.outputs.tag }}
-          generate_release_notes: true
+          name: Typora ${{ steps.version.outputs.value }}
+          append_body: false
           make_latest: true
+          body: |
+            ## 安装包
+
+            | 文件 | 适用机器 |
+            | --- | --- |
+            | `typora-${{ steps.version.outputs.value }}-x64-setup.exe` | Intel / AMD 机器 |
+            | `typora-${{ steps.version.outputs.value }}-arm64-setup.exe` | Windows on ARM（骁龙 X 系列等） |
+
+            安装包未做代码签名，首次运行时 SmartScreen 会拦截一次，选择「更多信息 → 仍要运行」即可。
+
+            **提交记录**：https://github.com/chenzhi-9019/typora/commits/${{ steps.version.outputs.tag }}
           files: |
             dist/*-setup.exe
             dist/latest*.yml
